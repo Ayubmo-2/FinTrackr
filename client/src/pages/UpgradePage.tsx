@@ -19,7 +19,7 @@ export default function UpgradePage() {
   const handleUpgrade = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/stripe/checkout', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/stripe/checkout`, {
         method: 'POST',
         headers: { Authorization: `Bearer ${accessToken}` },
         credentials: 'include',

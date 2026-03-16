@@ -11,7 +11,7 @@ export default function SettingsPage() {
   const handlePortal = async () => {
     setLoading(true);
     try {
-      const res = await fetch('/api/stripe/portal', {
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/stripe/portal`, {
         headers: { Authorization: `Bearer ${accessToken}` },
         credentials: 'include',
       });

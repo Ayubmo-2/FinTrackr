@@ -7,12 +7,12 @@ export function useRefreshToken() {
 
   const refresh = useCallback(async () => {
     try {
-      const res = await fetch('/api/auth/refresh', { method: 'POST', credentials: 'include' });
+      const res = await fetch(`${import.meta.env.VITE_API_URL}/auth/refresh`, { method: 'POST', credentials: 'include' });
       if (res.ok) {
         const data = await res.json();
         if (data.accessToken) {
           // Get current user info
-          const userRes = await fetch('/api/user/me', {
+          const userRes = await fetch(`${import.meta.env.VITE_API_URL}/user/me`, {
             headers: { Authorization: `Bearer ${data.accessToken}` },
             credentials: 'include',
           });

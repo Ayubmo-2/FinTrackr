@@ -16,7 +16,7 @@ export function FilterBar() {
   };
 
   const handleExport = () => {
-    fetch('/api/transactions/export', {
+    fetch(`${import.meta.env.VITE_API_URL}/transactions/export`, {
       headers: { Authorization: `Bearer ${accessToken}` },
       credentials: 'include',
     }).then((r) => r.blob()).then((blob) => {
