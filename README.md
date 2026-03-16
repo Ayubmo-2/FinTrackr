@@ -2,7 +2,7 @@
 
 A personal finance tracker built as a full-stack SaaS — track income and expenses, set budgets, visualise spending trends, and upgrade to Pro for unlimited usage and CSV exports.
 
-**Live site:** https://fintrackr-ayub-mohameds-projects-aeb98294.vercel.app
+**Live site:** [FinTrackr([url](https://fintrackr-alpha.vercel.app/login))
 
 **Test account:** `test@fintrackr.dev` / `Test1234!`
 
