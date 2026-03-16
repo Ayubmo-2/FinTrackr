@@ -11,13 +11,19 @@ import userRoutes from './routes/user.routes';
 
 const app = express();
 
+const allowedOrigins = [
+  process.env.CLIENT_URL,
+  /^http:\/\/localhost:\d+$/,
+  /^https:\/\/.*\.vercel\.app$/,
+].filter(Boolean);
+
 app.use(cors({
   origin: (origin, cb) => {
-    if (!origin || /^http:\/\/localhost:\d+$/.test(origin)) {
-      cb(null, true);
-    } else {
-      cb(new Error('Not allowed by CORS'));
-    }
+    if (!origin) return cb(null, true);
+    const allowed = allowedOrigins.some((o) =>
+      typeof o === 'string' ? o === origin : (o as RegExp).test(origin)
+    );
+    cb(allowed ? null : new Error('Not allowed by CORS'), allowed);
   },
   credentials: true,
 }));
