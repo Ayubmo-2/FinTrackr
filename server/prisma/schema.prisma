@@ -1,0 +1,66 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id               String         @id @default(uuid())
+  email            String         @unique
+  passwordHash     String
+  tier             Tier           @default(FREE)
+  stripeCustomerId String?
+  stripeSubId      String?
+  emailVerified    Boolean        @default(false)
+  createdAt        DateTime       @default(now())
+  transactions     Transaction[]
+  budgets          Budget[]
+  refreshTokens    RefreshToken[]
+}
+
+model Transaction {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  type      TxType
+  category  String
+  amount    Decimal  @db.Decimal(10, 2)
+  date      DateTime
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Budget {
+  id          String  @id @default(uuid())
+  userId      String
+  user        User    @relation(fields: [userId], references: [id], onDelete: Cascade)
+  category    String
+  limitAmount Decimal @db.Decimal(10, 2)
+  month       Int
+  year        Int
+
+  @@unique([userId, category, month, year])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid())
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  tokenHash String   @unique
+  expiresAt DateTime
+  revoked   Boolean  @default(false)
+}
+
+enum Tier {
+  FREE
+  PRO
+}
+
+enum TxType {
+  INCOME
+  EXPENSE
+}

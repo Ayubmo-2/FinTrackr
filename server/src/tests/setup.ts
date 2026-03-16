@@ -1,0 +1,9 @@
+process.env.DATABASE_URL = 'postgresql://dev:devpassword@localhost:5432/fintrackr_test';
+process.env.ACCESS_TOKEN_SECRET = 'test_access_secret_32chars_minimum_ok';
+process.env.REFRESH_TOKEN_SECRET = 'test_refresh_secret_32chars_minimum_ok';
+process.env.STRIPE_SECRET_KEY = 'sk_test_placeholder';
+process.env.STRIPE_WEBHOOK_SECRET = 'whsec_placeholder';
+process.env.STRIPE_PRO_PRICE_ID = 'price_placeholder';
+process.env.CLIENT_URL = 'http://localhost:5173';
+process.env.MAILTRAP_USER = 'placeholder';
+process.env.MAILTRAP_PASS = 'placeholder';
